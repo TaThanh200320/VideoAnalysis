@@ -1,0 +1,34 @@
+services:
+  web:
+    container_name: web
+    image: STCVideoAnalysis/web:latest
+    build:
+      context: ./web
+      dockerfile: WebDockerfile
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    tty: true
+    environment:
+      SERVICE_NAME: web
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./web:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini    
+    networks:
+      - service-networks
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "448:443"
+    volumes:
+      - ./web:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - service-networks
+networks:
+  service-networks:
+    driver: bridge

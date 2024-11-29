@@ -1,0 +1,17 @@
+# Basic video used
+FROM python:3.8.19-slim
+
+# Copy application code to container
+COPY . /app
+
+# Set working directory
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y libgl1 -y libglib2.0-0  -y ffmpeg
+
+# Upgrade pip and install necessary Python packages
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# startup script
+# CMD ["python", "/app/appGPU.py"]

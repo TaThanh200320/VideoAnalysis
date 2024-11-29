@@ -1,0 +1,10 @@
+/frames
+/db
+/redis-data
+/camera_analysis/app.log
+/camera_analysis/message.log
+/camera_analysis/time.log
+/camera_analysis/logs
+*.pyc
+__pycache__/
+/web/storage/debugbar

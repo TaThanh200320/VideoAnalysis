@@ -1,0 +1,116 @@
+services:
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data # Persist Redis data to the host
+    networks:
+      - service-networks
+
+  worker_1:
+    build:
+      context: ./camera_worker
+      dockerfile: WorkerDockerfile
+    image: STCVideoAnalysis/worker:lastest
+    restart: always
+    environment:
+      - WORKER_ID=1
+    depends_on:
+      - redis
+    volumes:
+      - ./camera_worker:/app
+      - ./frames/:/app/frames
+    command: sh -c "cd /app && python app.py"
+    networks:
+      - service-networks
+
+  # worker_2:
+  #   build:
+  #     context: ./camera_worker
+  #     dockerfile: WorkerDockerfile
+  #   image: STCVideoAnalysis/worker:lastest
+  #   restart: always
+  #   environment:
+  #     - WORKER_ID=2
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./camera_worker:/app
+  #     - ./frames/:/app/frames
+  #   command: sh -c "cd /app && python app.py"
+  #   networks:
+  #     - service-networks
+
+  # worker_3:
+  #   build:
+  #     context: ./camera_worker
+  #     dockerfile: WorkerDockerfile
+  #   image: STCVideoAnalysis/worker:lastest
+  #   restart: always
+  #   environment:
+  #     - WORKER_ID=3
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./camera_worker:/app
+  #     - ./frames/:/app/frames
+  #   command: sh -c "cd /app && python app.py"
+  #   networks:
+  #     - service-networks
+
+  # worker_4:
+  #   build:
+  #     context: ./camera_worker
+  #     dockerfile: WorkerDockerfile
+  #   image: STCVideoAnalysis/worker:lastest
+  #   restart: always
+  #   environment:
+  #     - WORKER_ID=4
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./camera_worker:/app
+  #     - ./frames/:/app/frames
+  #   command: sh -c "cd /app && python app.py"
+  #   networks:
+  #     - service-networks
+
+  # worker_5:
+  #   build:
+  #     context: ./camera_worker
+  #     dockerfile: WorkerDockerfile
+  #   image: STCVideoAnalysis/worker:lastest
+  #   restart: always
+  #   environment:
+  #     - WORKER_ID=5
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./camera_worker:/app
+  #     - ./frames/:/app/frames
+  #   command: sh -c "cd /app && python app.py"
+  #   networks:
+  #     - service-networks
+
+  # worker_6:
+  #   build:
+  #     context: ./camera_worker
+  #     dockerfile: WorkerDockerfile
+  #   image: STCVideoAnalysis/worker:lastest
+  #   restart: always
+  #   environment:
+  #     - WORKER_ID=6
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./camera_worker:/app
+  #     - ./frames/:/app/frames
+  #   command: sh -c "cd /app && python app.py"
+  #   networks:
+  #     - service-networks
+
+networks:
+  service-networks:
+    driver: bridge

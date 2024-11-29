@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+.select2 {
+    height: 37.6px;
+    border: white !important;
+}
+
+.select2-selection {
+    border-color: #dbdfe6 !important;
+    border-radius: 6px !important;
+    height: 37.6px !important;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-selection__rendered {
+    height: 37.6px !important;
+    padding-top: 3px;
+    border: white;
+}
+
+.select2-selection__clear {
+    padding-top: 3px;
+}
+
+.select2-selection__arrow {
+    margin-top: 3px;
+}
+
+.grid-stack-item-content {
+    background-color: white;
+}
+
+.grid-stack {
+    height: 70vh;
+}
+
+.dt-type-numeric {
+    text-align: left !important;
+}
+
+.dt-type-date {
+    text-align: left !important;
+}
